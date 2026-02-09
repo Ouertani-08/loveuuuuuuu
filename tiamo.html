@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Per Te ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+#heart {
+    font-size: 60px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+#content {
+    display: none;
+    text-align: center;
+    padding: 20px;
+}
+
+.explosion {
+    animation: explode 0.6s forwards;
+}
+
+@keyframes explode {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(3); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="heart">❤️</div>
+
+<div id="content">
+    <h1>Benvenuta amore mio 💖</h1>
+    <p>Questo è il posto dove esisti solo tu.</p>
+    <p>Ora posso dirti perché ti sceglierei altre mille volte...</p>
+</div>
+
+<script>
+let clicks = 0;
+const heart = document.getElementById("heart");
+const content = document.getElementById("content");
+
+heart.addEventListener("click", () => {
+    clicks++;
+    heart.style.transform = "scale(" + (1 + clicks * 0.2) + ")";
+
+    if (clicks >= 6) {
+        heart.classList.add("explosion");
+        setTimeout(() => {
+            heart.style.display = "none";
+            content.style.display = "block";
+        }, 600);
+    }
+});
+</script>
+
+</body>
+</html>
