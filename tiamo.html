@@ -19,9 +19,9 @@
             --accent: #ff4d82;
             --accent-2: #ff8fb3;
             --soft: #ffd6e5;
-            --glass: rgba(255, 255, 255, 0.08);
-            --glass-stroke: rgba(255, 255, 255, 0.2);
-            --shadow: 0 10px 40px rgba(255, 77, 130, 0.35);
+            --glass: rgba(255, 255, 255, .08);
+            --glass-stroke: rgba(255, 255, 255, .2);
+            --shadow: 0 10px 40px rgba(255, 77, 130, .35);
         }
 
         * {
@@ -31,12 +31,12 @@
         html,
         body {
             height: 100%;
-            margin: 0;
+            margin: 0
         }
 
         body {
-            /* Gradiento animato romantico */
-            background: radial-gradient(1200px 1200px at 10% 10%, #2a0c2c 0%, transparent 60%),
+            background:
+                radial-gradient(1200px 1200px at 10% 10%, #2a0c2c 0%, transparent 60%),
                 radial-gradient(900px 900px at 90% 20%, #2b0d35 0%, transparent 60%),
                 linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
             background-size: 200% 200%;
@@ -49,17 +49,16 @@
             color: #fff;
         }
 
-        /* lieve texture glitter */
         body:before {
             content: "";
             position: fixed;
             inset: 0;
-            background-image:
-                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.06) 0 1px, transparent 2px),
-                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.05) 0 1px, transparent 2px);
-            background-size: 3px 3px, 4px 4px;
-            mix-blend-mode: screen;
             pointer-events: none;
+            mix-blend-mode: screen;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, .06) 0 1px, transparent 2px),
+                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, .05) 0 1px, transparent 2px);
+            background-size: 3px 3px, 4px 4px;
         }
 
         @keyframes bgShift {
@@ -74,14 +73,16 @@
             }
         }
 
-        /* Contenitore centrale in vetro */
+        /* Contenitore principale */
         .container {
             position: relative;
             width: min(920px, 92vw);
             min-height: 60vh;
+            max-height: 80vh;
+            overflow-y: auto;
             padding: clamp(18px, 3vw, 34px);
             border-radius: 28px;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+            background: linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .02));
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid var(--glass-stroke);
@@ -89,12 +90,24 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             text-align: center;
             isolation: isolate;
+            justify-content: flex-start;
+            gap: 16px;
         }
 
-        /* Cornice decorativa morbida */
+        /* Wrapper che centra cuore + ring */
+        .heart-center {
+            position: relative;
+            width: 100%;
+            height: 40vh;
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
         .container:before,
         .container:after {
             content: "";
@@ -105,26 +118,27 @@
         }
 
         .container:before {
-            background: conic-gradient(from 180deg at 50% 50%, rgba(255, 77, 130, 0.18), rgba(255, 143, 179, 0.12), rgba(255, 77, 130, 0.18));
+            background: conic-gradient(from 180deg at 50% 50%,
+                    rgba(255, 77, 130, .18), rgba(255, 143, 179, .12), rgba(255, 77, 130, .18));
             filter: blur(22px);
-            opacity: 0.7;
+            opacity: .7;
             z-index: -1;
         }
 
         .container:after {
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, .06)
         }
 
-        /* Cuore principale */
+        /* Cuore */
         #heart {
             font-size: clamp(58px, 12vw, 120px);
             cursor: pointer;
             user-select: none;
-            transition: transform 0.25s ease, filter 0.25s ease;
-            filter: drop-shadow(0 6px 18px rgba(255, 77, 130, 0.55));
+            transition: transform .25s ease, filter .25s ease;
+            filter: drop-shadow(0 6px 18px rgba(255, 77, 130, .55));
             will-change: transform;
             line-height: 1;
-            margin: 12px 0 8px;
+            margin: 0;
         }
 
         #heart:hover {
@@ -135,7 +149,38 @@
             transform: scale(0.98)
         }
 
-        /* Scintille attorno al cuore */
+        /* Ring dietro al cuore */
+        .ring {
+            position: absolute;
+            width: clamp(120px, 40vw, 320px);
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            background: radial-gradient(circle,
+                    rgba(255, 77, 130, .45) 0%,
+                    rgba(255, 77, 130, .16) 35%,
+                    rgba(255, 77, 130, .02) 70%,
+                    transparent 75%);
+            filter: blur(10px);
+            z-index: -1;
+            transform: translateY(4px);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1) translateY(4px);
+                opacity: .9
+            }
+
+            50% {
+                transform: scale(1.08) translateY(4px);
+                opacity: 1
+            }
+        }
+
+        /* Scintille click */
         .sparkle {
             position: absolute;
             width: 10px;
@@ -149,8 +194,8 @@
 
         @keyframes sparkleUp {
             0% {
-                transform: translate(-50%, -50%) scale(0.4);
-                opacity: 0.9
+                transform: translate(-50%, -50%) scale(.4);
+                opacity: .9
             }
 
             100% {
@@ -159,27 +204,30 @@
             }
         }
 
-        /* Titoli e testi del contenuto */
+        /* Testi */
         h1 {
             font-family: 'Great Vibes', cursive;
             font-size: clamp(32px, 6vw, 64px);
             margin: 10px 0 6px;
             color: #fff;
-            text-shadow: 0 2px 18px rgba(255, 77, 130, 0.45);
-            letter-spacing: 0.5px;
+            text-shadow: 0 2px 18px rgba(255, 77, 130, .45);
+            letter-spacing: .5px;
         }
 
         p {
             font-size: clamp(15px, 2.6vw, 18px);
             color: #ffeef5;
-            opacity: 0.95;
+            opacity: .95;
             margin: 6px 0;
         }
 
-        /* Area contenuti nascosti inizialmente */
+        /* Contenuto post-esplosione */
         #content {
             display: none;
-            animation: fadeInUp 0.9s ease both;
+            animation: fadeInUp .9s ease both;
+            max-height: 60vh;
+            overflow-y: auto;
+            padding-right: 8px;
         }
 
         @keyframes fadeInUp {
@@ -194,81 +242,31 @@
             }
         }
 
-        /* Bottone stile capsule, se ti servirà poi */
-        .button {
-            margin-top: 18px;
-            padding: 12px 20px;
-            border-radius: 999px;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            color: #1b0d19;
-            background: linear-gradient(180deg, var(--soft), #ffc4d8);
-            box-shadow: 0 8px 26px rgba(255, 143, 179, 0.35);
-            font-weight: 600;
-            letter-spacing: 0.2px;
-            transition: transform .15s ease, box-shadow .2s ease, filter .2s ease;
-        }
-
-        .button:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.02)
-        }
-
-        .button:active {
-            transform: translateY(0);
-        }
-
-        /* Anello glow decorativo dietro al cuore */
-        .ring {
-            position: absolute;
-            width: clamp(120px, 40vw, 320px);
-            aspect-ratio: 1 / 1;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(255, 77, 130, 0.45) 0%, rgba(255, 77, 130, 0.16) 35%, rgba(255, 77, 130, 0.02) 70%, transparent 75%);
-            filter: blur(10px);
-            z-index: -1;
-            transform: translateY(4px);
-            animation: pulse 3s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                transform: scale(1) translateY(4px);
-                opacity: 0.9
-            }
-
-            50% {
-                transform: scale(1.08) translateY(4px);
-                opacity: 1
-            }
-        }
-
-        /* Cuoricini fluttuanti di sfondo */
+        /* Cuori di sfondo */
         .hearts-bg {
             position: fixed;
             inset: 0;
             overflow: hidden;
             pointer-events: none;
-            z-index: -2;
+            z-index: -2
         }
 
         .floating-heart {
             position: absolute;
             font-size: clamp(14px, 2.2vw, 22px);
-            opacity: 0.4;
+            opacity: .4;
             animation: floatUp linear forwards;
-            filter: drop-shadow(0 6px 14px rgba(255, 77, 130, 0.35));
+            filter: drop-shadow(0 6px 14px rgba(255, 77, 130, .35));
         }
 
         @keyframes floatUp {
             0% {
-                transform: translateY(20vh) scale(0.6);
+                transform: translateY(20vh) scale(.6);
                 opacity: 0
             }
 
             10% {
-                opacity: 0.5
+                opacity: .5
             }
 
             100% {
@@ -279,7 +277,7 @@
 
         /* Esplosione */
         .explosion {
-            animation: explode 0.6s forwards;
+            animation: explode .6s forwards
         }
 
         @keyframes explode {
@@ -294,7 +292,7 @@
             }
         }
 
-        /* Cofanetti di coriandoli a cuori */
+        /* Confetti */
         .confetti {
             position: absolute;
             top: 50%;
@@ -309,11 +307,16 @@
             will-change: transform, opacity;
         }
 
-        /* Media tweak */
-        @media (max-width: 480px) {
+        /* Mobile */
+        @media (max-width:480px) {
             .container {
                 min-height: 64vh;
                 padding: 18px
+            }
+
+            .heart-center {
+                height: 38vh;
+                min-height: 200px
             }
         }
     </style>
@@ -325,11 +328,12 @@
     <div class="hearts-bg" aria-hidden="true" id="hearts-bg"></div>
 
     <div class="container" role="main" aria-live="polite">
-        <div class="ring" aria-hidden="true"></div>
+        <!-- WRAPPER che centra cuore + ring -->
+        <div class="heart-center" id="heart-center">
+            <div class="ring" aria-hidden="true"></div>
 
-        <!-- Cuore interattivo -->
-        <div id="heart" role="button" aria-label="Clicca il cuore">
-            ❤️
+            <!-- Cuore interattivo -->
+            <div id="heart" role="button" aria-label="Clicca il cuore" tabindex="0">❤️</div>
         </div>
 
         <!-- Contenuto che appare dopo l'esplosione -->
@@ -359,10 +363,7 @@
                 Ti amo, amore mio.<br>
                 ❤️❤️❤️❤️❤️❤️❤️❤️
             </p>
-
-
-            <!-- Esempio di bottone (opzionale): 
-    <button class="button">Apri la sorpresa</button> -->
+            <!-- <button class="button">Apri la sorpresa</button> -->
         </div>
     </div>
 
@@ -371,6 +372,7 @@
         let clicks = 0;
         const heart = document.getElementById("heart");
         const content = document.getElementById("content");
+        const heartCenter = document.getElementById("heart-center");
 
         /* Scintille rapide attorno al click */
         function createSparkles(x, y) {
@@ -407,7 +409,6 @@
 
                 confetti.appendChild(span);
 
-                // animate with JS for fine control
                 requestAnimationFrame(() => {
                     span.animate([
                         { transform: 'translate(0,0) scale(0.6) rotate(0deg)', opacity: 1 },
@@ -447,7 +448,9 @@
             if (clicks >= 6) {
                 heart.classList.add("explosion");
                 setTimeout(() => {
-                    heart.style.display = "none";
+                    /* Nasconde TUTTO il blocco centrato (cuore + ring) */
+                    heartCenter.style.display = "none";
+                    /* Mostra il contenuto */
                     content.style.display = "block";
                     heartConfetti();
                 }, 600);
@@ -455,7 +458,6 @@
         }, { passive: true });
 
         /* Accessibilità tastiera: invio/space */
-        heart.setAttribute('tabindex', '0');
         heart.addEventListener('keydown', (ev) => {
             if (ev.key === 'Enter' || ev.key === ' ') {
                 heart.click();
