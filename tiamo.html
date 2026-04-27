@@ -13,16 +13,19 @@
 
     <style>
         :root {
-            --bg1: #0f0a1f;
-            --bg2: #1a0f2e;
-            --bg3: #3a0d37;
-            --accent: #ff4d82;
-            --accent-2: #ff8fb3;
-            --soft: #ffd6e5;
-            --glass: rgba(255, 255, 255, .08);
-            --glass-stroke: rgba(255, 255, 255, .2);
-            --shadow: 0 10px 40px rgba(255, 77, 130, .35);
-        }
+    --bg1: #000000;
+    --bg2: #050505;
+    --bg3: #0a0a0a;
+
+    --accent: #2a2a2a;
+    --accent-2: #3a3a3a;
+    --soft: #1a1a1a;
+
+    --glass: rgba(255, 255, 255, .04);
+    --glass-stroke: rgba(255, 255, 255, .08);
+
+    --shadow: 0 10px 40px rgba(0, 0, 0, .8);
+}
 
         * {
             box-sizing: border-box
@@ -35,10 +38,13 @@
         }
 
         body {
-            background:
-                radial-gradient(1200px 1200px at 10% 10%, #2a0c2c 0%, transparent 60%),
-                radial-gradient(900px 900px at 90% 20%, #2b0d35 0%, transparent 60%),
-                linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+    
+background:
+        radial-gradient(1200px 1200px at 15% 15%, #111111 0%, transparent 60%),
+        radial-gradient(900px 900px at 85% 25%, #080808 0%, transparent 60%),
+        linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+
+
             background-size: 200% 200%;
             animation: bgShift 16s ease-in-out infinite;
             display: flex;
@@ -117,13 +123,7 @@
             pointer-events: none;
         }
 
-        .container:before {
-            background: conic-gradient(from 180deg at 50% 50%,
-                    rgba(255, 77, 130, .18), rgba(255, 143, 179, .12), rgba(255, 77, 130, .18));
-            filter: blur(22px);
-            opacity: .7;
-            z-index: -1;
-        }
+        
 
         .container:after {
             border: 1px solid rgba(255, 255, 255, .06)
@@ -135,7 +135,7 @@
             cursor: pointer;
             user-select: none;
             transition: transform .25s ease, filter .25s ease;
-            filter: drop-shadow(0 6px 18px rgba(255, 77, 130, .55));
+            filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0));
             will-change: transform;
             line-height: 1;
             margin: 0;
@@ -150,21 +150,7 @@
         }
 
         /* Ring dietro al cuore */
-        .ring {
-            position: absolute;
-            width: clamp(120px, 40vw, 320px);
-            aspect-ratio: 1 / 1;
-            border-radius: 50%;
-            background: radial-gradient(circle,
-                    rgba(255, 77, 130, .45) 0%,
-                    rgba(255, 77, 130, .16) 35%,
-                    rgba(255, 77, 130, .02) 70%,
-                    transparent 75%);
-            filter: blur(10px);
-            z-index: -1;
-            transform: translateY(4px);
-            animation: pulse 3s ease-in-out infinite;
-        }
+        
 
         @keyframes pulse {
 
@@ -333,12 +319,19 @@
             <div class="ring" aria-hidden="true"></div>
 
             <!-- Cuore interattivo -->
-            <div id="heart" role="button" aria-label="Clicca il cuore" tabindex="0">❤️</div>
+            <div id="heart" role="button" aria-label="Clicca il cuore" tabindex="0">👾</div>
         </div>
 
         <!-- Contenuto che appare dopo l'esplosione -->
         <div id="content">
-            <p></p>
+            <p>NON SEI FIGO SE MI BLOCCHI</p>
+            <p>NON SEI FIGO SE MI BLOCCHI</p>
+            <p>NON SEI FIGO SE MI BLOCCHI</p>
+            <p>NON SEI FIGO SE MI BLOCCHI</p>
+            <p>NON SEI FIGO SE MI BLOCCHI</p>
+            <p>NON SEI FIGO SE MI BLOCCHI</p>
+            <p>NON SEI FIGO SE MI BLOCCHI</p>
+            <p>NON SEI FIGO SE MI BLOCCHI</p>
             <!-- <button class="button">Apri la sorpresa</button> -->
         </div>
     </div>
@@ -371,7 +364,7 @@
             const howMany = 28;
             for (let i = 0; i < howMany; i++) {
                 const span = document.createElement('span');
-                span.textContent = ['💖', '💘', '❤️', '💕', '💞'][i % 5];
+                span.textContent = ['💀', '🔥', '😒', '🙏', '🤦‍♂️'][i % 5];
                 const angle = (Math.PI * 2) * (i / howMany);
                 const dist = 40 + Math.random() * 110;
                 const tx = Math.cos(angle) * dist;
@@ -402,7 +395,7 @@
         function spawnFloatingHeart() {
             const h = document.createElement('div');
             h.className = 'floating-heart';
-            h.textContent = Math.random() > 0.6 ? '💞' : (Math.random() > 0.5 ? '💕' : '❤️');
+            h.textContent = Math.random() > 0.6 ? '💀' : (Math.random() > 0.5 ? '🔥' : '😒');
             h.style.left = Math.random() * 100 + 'vw';
             h.style.bottom = '-10vh';
             const dur = 10 + Math.random() * 12;
